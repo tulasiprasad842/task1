@@ -1,0 +1,37 @@
+<h3>FeedBack</h3>
+<div class="container">
+    <form [formGroup]="feedBackForm" (ngsubmits)="onSubmit()">
+        <div>
+            <label>Name: </label>
+            <input placeholder="Name" formControlName="Name" required/>
+            <div *ngIf="feedBackForm.controls.Name.errors?.required"></div>
+        </div><br>
+
+        <div>
+            <label>Email: </label>
+            <input placeholder="email" formControlName="Email" required/>
+            <div *ngIf="feedBackForm.controls.Email.errors?.required"></div>
+            <div *ngIf="feedBackForm.controls.Email.hasError('email')">This Is a Invalid Email</div>
+        </div><br>
+
+        <div>
+            <label>mobileNo: </label>
+            <input placeholder="mobileNo" formControlName="mobileNo" minlength="10" maxlength="10" required numbersOnly/>
+            <div *ngIf="feedBackForm.controls.mobileNo.errors?.required"></div>
+            <div *ngIf="feedBackForm.controls.mobileNo.errors?.minlength || 
+            feedBackForm.controls.mobileNo.errors?.maxlength"></div>
+            <div *ngIf="feedBackForm.controls.mobileNo.errors?.pattern">Number Must be Digits Only"</div>
+        </div><br>
+
+        <div>
+            <label>FeedBack: </label>
+            <textarea type="text" placeholder="Enter Your feedback" formControlName="Feedback" required ></textarea>
+            <div *ngIf="feedBackForm.controls.Feedback.errors?.required"></div>
+
+        </div><br>
+
+        <div>
+            <button type="button" class="btn btn-primary" [disabled]="feedBackForm.invalid" (click)="onSubmit()">Submit Feedback</button>
+        </div>
+    </form>
+</div>
